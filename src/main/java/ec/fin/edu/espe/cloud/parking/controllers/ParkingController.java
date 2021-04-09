@@ -43,4 +43,18 @@ public class ParkingController {
 	{
 		return repository.findAll();
 	}
+	
+	@GetMapping("/parking/{space}/get-state")
+	public Integer getState(@PathVariable String space)
+	{
+		Optional<Parking> parkOptional =  repository.findBySpace(space);
+		if(parkOptional.isPresent())
+		{
+			 if(parkOptional.get().getEnable())
+			 {
+				 return 1;
+			 }
+		}
+		return 0;
+	}
 }
