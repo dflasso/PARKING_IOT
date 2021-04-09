@@ -13,7 +13,6 @@ import ec.fin.edu.espe.cloud.parking.model.Parking;
 import ec.fin.edu.espe.cloud.parking.repositorys.ParkingRepository;
 
 @RestController
-@CrossOrigin("*")
 public class ParkingController {
 	
 	@Autowired
