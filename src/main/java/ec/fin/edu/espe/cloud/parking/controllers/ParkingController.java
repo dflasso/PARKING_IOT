@@ -17,14 +17,22 @@ public class ParkingController {
 	@Autowired
 	private ParkingRepository repository;
 	
-	@GetMapping("/parking/{space}/update")
-	public String updateParking(@PathVariable String space)
+	@GetMapping("/parking/{space}/{state}/update")
+	public String updateParking(@PathVariable String space, @PathVariable Integer state)
 	{
 		Optional<Parking> parkOptional =  repository.findBySpace(space);
 		if(parkOptional.isPresent())
 		{
-			parkOptional.get().setEnable(!parkOptional.get().getEnable());
-			repository.save(parkOptional.get());
+			Parking park = parkOptional.get();
+			if(state == 1)
+			{
+				park.setEnable(true);
+			}
+			else
+			{
+				park.setEnable(false);
+			}
+			repository.save(park);
 		}
 		
 		return "Ok";
